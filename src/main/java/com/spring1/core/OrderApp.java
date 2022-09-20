@@ -8,13 +8,11 @@ import com.spring1.core.order.Order;
 import com.spring1.core.order.OrderService;
 import com.spring1.core.order.OrderServiceImpl;
 
-import java.util.Arrays;
-
 public class OrderApp {
     //자바코드 메인메소드로 테스트하기
     public static void main(String[] args) {
         MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+        OrderService orderService = new OrderServiceImpl(memberRepository, discountPolicy);
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);
