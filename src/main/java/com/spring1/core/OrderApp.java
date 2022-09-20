@@ -11,8 +11,10 @@ import com.spring1.core.order.OrderServiceImpl;
 public class OrderApp {
     //자바코드 메인메소드로 테스트하기
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl(memberRepository, discountPolicy);
+
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);
