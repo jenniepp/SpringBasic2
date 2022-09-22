@@ -3,7 +3,10 @@ package com.spring1.core.order;
 import com.spring1.core.discount.DiscountPolicy;
 import com.spring1.core.member.Member;
 import com.spring1.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
    // private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -12,6 +15,7 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy; //인터페이스에만 의존(구체화 의존 x) + discountPolicy에 의존성 주입
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
