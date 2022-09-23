@@ -3,10 +3,12 @@ package com.spring1.core.order;
 import com.spring1.core.discount.DiscountPolicy;
 import com.spring1.core.member.Member;
 import com.spring1.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor //final이 붙은 필드 생성자 생성(Lombok)
 public class OrderServiceImpl implements OrderService{
 
    // private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -15,11 +17,21 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy; //인터페이스에만 의존(구체화 의존 x) + discountPolicy에 의존성 주입
 
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    @Autowired //생성자 호출
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
+
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+//
+//    @Autowired
+//    public void setDiscountPolicy(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//    }
 
 
     @Override

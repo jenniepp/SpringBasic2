@@ -2,12 +2,14 @@ package com.spring1.core.scan.filter;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.context.annotation.ComponentScan.*;
 
 public class ComponentFilterAppConfigTest {
@@ -18,8 +20,10 @@ public class ComponentFilterAppConfigTest {
         BeanA beanA = ac.getBean("beanA", BeanA.class);
         Assertions.assertThat(beanA).isNotNull();
 
-        BeanB beanB = ac.getBean("beanB", BeanB.class);
-        Assertions.assertThat(beanB).isNull();
+        //MyExcludeComponent라 조회되지 않는다.
+        //BeanB beanB = ac.getBean("beanB", BeanB.class);
+        assertThrows(NoSuchBeanDefinitionException.class,
+                () -> ac.getBean("beanB", BeanB.class));
     }
 
     @Configuration
