@@ -1,5 +1,11 @@
 package com.spring1.core.lifecycle;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 //빈 생명주기
 public class NetworkClient {
 
@@ -7,8 +13,7 @@ public class NetworkClient {
 
     public NetworkClient(){ //생성할때 생성자 호출
         System.out.println("생성자 호출, url = " + url);
-        connect();
-        call("초기화 연결 메세지");
+
     }
 
     public void setUrl(String url) { //url은 외부에서 넣을 수 있게
@@ -29,4 +34,17 @@ public class NetworkClient {
         System.out.println("close: " + url);
     }
 
+
+    //의존관계 주입이 끝나면 호출
+    @PostConstruct
+    public void init() throws Exception {
+        connect();
+        call("초기화 연결 메세지");
+    }
+
+    @PreDestroy
+    //closing 후 호출
+    public void close() throws Exception {
+        disconnect();
+    }
 }
